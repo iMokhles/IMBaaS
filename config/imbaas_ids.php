@@ -21,4 +21,5 @@ return [
 
     'applicationId' => env('API_APPLICATION_ID', 'SomeRandomString'),
     'applicationIdLength' => env('API_APPLICATION_ID_LENGTH', 16),
+    'applicationIdHeaderKey' => env('API_APPLICATION_ID_HEADER_KEY', 'X_IMBaaS_Application_Id'),
 ];

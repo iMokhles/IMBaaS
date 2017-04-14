@@ -13,7 +13,7 @@ class BaseApiMiddleware
      */
 
     protected function checkAppId($request) {
-        $appId = $request->header('X_IMBaaS_Application_Id');
+        $appId = $request->header(config('imbaas_ids.applicationIdHeaderKey'));
         if (empty($appId)) {
             return false;
         }
