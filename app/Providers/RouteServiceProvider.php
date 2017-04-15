@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapApiSchemasRoutes();
         $this->mapApiUsersRoutes();
         $this->mapApiSessionsRoutes();
         $this->mapApiRolesRoutes();
@@ -146,5 +147,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api_analytics')
             ->namespace($this->namespace.'\Api\Analytics')
             ->group(base_path('routes/analytics_api.php'));
+    }
+
+    protected function mapApiSchemasRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api_schemas')
+            ->namespace($this->namespace.'\Api\Schemas')
+            ->group(base_path('routes/schemas_api.php'));
     }
 }

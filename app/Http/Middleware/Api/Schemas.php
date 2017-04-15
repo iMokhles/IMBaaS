@@ -4,7 +4,7 @@ namespace App\Http\Middleware\Api;
 
 use Closure;
 
-class Users extends BaseApiMiddleware
+class Schemas extends BaseApiMiddleware
 {
     /**
      * Handle an incoming request.

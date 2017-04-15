@@ -9,6 +9,7 @@ use App\Http\Middleware\Api\Files;
 use App\Http\Middleware\Api\Installations;
 use App\Http\Middleware\Api\Pushs;
 use App\Http\Middleware\Api\Roles;
+use App\Http\Middleware\Api\Schemas;
 use App\Http\Middleware\Api\Sessions;
 use App\Http\Middleware\Api\Users;
 
@@ -70,6 +71,9 @@ class Kernel extends HttpKernel
         ],
         'api_analytics' => [
             Analytics::class
+        ],
+        'api_schemas' => [
+            Schemas::class
         ],
 
         'api' => [

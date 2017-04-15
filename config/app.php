@@ -172,6 +172,7 @@ return [
          * API
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        Laracasts\Generators\GeneratorsServiceProvider::class,
 
         /*
          * Application Service Providers...
