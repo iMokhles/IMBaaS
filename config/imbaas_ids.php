@@ -23,7 +23,11 @@ return [
     |
     */
 
-    'applicationId' => env('API_APPLICATION_ID', 'TXEIbxMb90zpGIOBkar2q8MnRedYXzE0'),
+    'applicationId' => env('API_APPLICATION_ID', '0L5ozw1YbgUnIofF5Egno6RVFFM9YuXG'),
     'applicationIdLength' => env('API_APPLICATION_ID_LENGTH', 32),
     'applicationIdHeaderKey' => env('API_APPLICATION_ID_HEADER_KEY', 'X_IMBaaS_Application_Id'),
+
+    'applicationMasterId' => env('API_APPLICATION_MASTER_ID', '7fz6FATbscbCzE6N6HxcvRNrAsHpUxcH'),
+    'applicationMasterIdLength' => env('API_APPLICATION_MASTER_ID_LENGTH', 32),
+    'applicationMasterIdHeaderKey' => env('API_APPLICATION_MASTER_ID_HEADER_KEY', 'X_IMBaaS_Master_Id'),
 ];

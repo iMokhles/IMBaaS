@@ -25,4 +25,18 @@ class BaseApiMiddleware
         }
         return true;
     }
+
+    protected function checkAppMasterId($request) {
+        $appId = $request->header(config('imbaas_ids.applicationMasterIdHeaderKey'));
+        if (empty($appId)) {
+            return false;
+        }
+        if (strlen($appId) != config('imbaas_ids.applicationMasterIdLength')) {
+            return false;
+        }
+        if ($appId != config('imbaas_ids.applicationMasterId')) {
+            return false;
+        }
+        return true;
+    }
 }

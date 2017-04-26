@@ -15,7 +15,7 @@ class Schemas extends BaseApiMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($this->checkAppId($request)) {
+        if ($this->checkAppId($request) && $this->checkAppMasterId($request)) {
             return $next($request);
         } else {
             return response()->json([
