@@ -13,6 +13,6 @@ return [
     | Application Settings
     |--------------------------------------------------------------------------
     */
-
+    'appName' => env('API_APP_NAME', 'IMBaaS'),
     'allowClassCreation' => env('API_ALLOW_CLASS_CREATION', true)
 ];

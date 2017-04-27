@@ -175,6 +175,11 @@ return [
         Laracasts\Generators\GeneratorsServiceProvider::class,
 
         /*
+         *  Spatie Services Providers
+         */
+        Spatie\Permission\PermissionServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,

@@ -13,14 +13,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/error/{error_number}', function ($error_number) {
-    return view('errors.error',['error_number' => $error_number]);
-});
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
