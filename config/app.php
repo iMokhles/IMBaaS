@@ -12,8 +12,8 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
-
+    'name' => 'IMBaaS',
+    'compny_name' => 'IMBaaS',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -52,6 +52,21 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'gplus_url' => "http://googleplus.com",
+    'tw_url' => "http://twitter.com",
+    'fb_url' => "http://facebook.com",
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application logos
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'email_logo' => 'email_logo.png',
+    'logo_fb' => 'facebook.png',
+    'logo_tw' => 'twitter.png',
+    'logo_gplus' => 'googleplus.png',
 
     /*
     |--------------------------------------------------------------------------
@@ -173,6 +188,7 @@ return [
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Laracasts\Generators\GeneratorsServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
         /*
          *  Spatie Services Providers
@@ -187,6 +203,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Email Packages
+         */
+        Snowfire\Beautymail\BeautymailServiceProvider::class,
 
     ],
 
@@ -236,6 +257,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
 

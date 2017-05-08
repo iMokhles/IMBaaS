@@ -29,15 +29,6 @@ $api->version('v1', function ($api) {
         // post users
         $api->post('users', ['as' => 'users.store', 'uses' => 'UsersController@store']);
 
-        // get user
-        $api->get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show']);
-
-        // put users
-        $api->put('users/{id}', ['as' => 'users.update', 'uses' => 'UsersController@update']);
-
-        // delete users
-        $api->delete('users/{id}', ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
-
         // get login
         $api->get('users/login', ['as' => 'users.login', 'uses' => 'UsersController@login']);
 
@@ -49,5 +40,21 @@ $api->version('v1', function ($api) {
 
         // post request verification email
         $api->post('users/requestVerificationEmail', ['as' => 'users.requestVerificationEmail', 'uses' => 'UsersController@requestVerificationEmail']);
+
+//        // get and verify email verification token
+//        $api->get('users/verifyEmail/{token}', ['as' => 'users.verifyEmail', 'uses' => 'UsersController@verifyEmail']);
+//
+//        // get reset password token and change password
+//        $api->get('users/resetPassword/{token}', ['as' => 'users.resetPassword', 'uses' => 'UsersController@resetPassword']);
+
+        // get user
+        $api->get('users/{id}', ['as' => 'users.show', 'uses' => 'UsersController@show']);
+
+        // put users
+        $api->put('users/{id}', ['as' => 'users.update', 'uses' => 'UsersController@update']);
+
+        // delete users
+        $api->delete('users/{id}', ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
+
     });
 });

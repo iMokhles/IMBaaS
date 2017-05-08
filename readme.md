@@ -4,12 +4,15 @@ IMBaaS is a Backend as a Service application built with Laravel to get your own 
 
 # TODO
 
-- [ ] C.R.U.D
-- [ ] Auth by JWT
-- [ ] Security
-- [ ] ACL ( Access Control Level )
-- [ ] Admin Panel aka ( Dashboard )
-
+- [ ] Analytics
+- [ ] Classes
+- [ ] Files
+- [ ] Installation
+- [ ] Pushs
+- [ ] Roles
+- [ ] Sessions ( if needed )
+- [ ] Admin Panel ( Dashboard )
+- [ ] Support Multi Applications requests ^_^
 
 
 ## Contributing

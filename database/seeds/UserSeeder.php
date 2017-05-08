@@ -35,5 +35,7 @@ class UserSeeder extends Seeder
             $userCreated = User::create($user);
             $userCreated->assignRole('adminstrator');
         }
+
+       factory(App\User::class, 300)->create();
     }
 }

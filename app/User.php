@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Notifications\EmailResetPassword;
+use App\Notifications\EmailVerification;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -10,13 +13,14 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password',
     ];
 
     /**
@@ -27,4 +31,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $dates = ['deleted_at'];
+
+    public function verified()
+    {
+        $this->emailVerified = true;
+        $this->save();
+    }
+    public function sendVerifyEmail()
+    {
+        $this->notify(new EmailVerification($this));
+    }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new EmailResetPassword($this, $token));
+    }
 }

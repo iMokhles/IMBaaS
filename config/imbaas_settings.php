@@ -14,5 +14,6 @@ return [
     |--------------------------------------------------------------------------
     */
     'appName' => env('API_APP_NAME', 'IMBaaS'),
-    'allowClassCreation' => env('API_ALLOW_CLASS_CREATION', true)
+    'allowClassCreation' => env('API_ALLOW_CLASS_CREATION', true),
+    'shouldVerifyEmail' => env('API_SHOULD_VERIFY_EMAIL', true)
 ];

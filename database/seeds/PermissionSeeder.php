@@ -30,6 +30,12 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'name' => 'moderator'
+            ],
+            [
+                'name' => 'user'
+            ],
+            [
+                'name' => 'customer'
             ]
         ];
 

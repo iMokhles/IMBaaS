@@ -24,3 +24,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/users/verifyEmail/{token}', 'Api\Users\UsersController@verifyEmail')->name('users.verifyEmail');
+Route::get('/users/resetPassword/{token}', 'Api\Users\UsersController@resetPassword')->name('users.resetPassword');
