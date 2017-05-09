@@ -11,6 +11,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "snowfire/beautymail": "dev-master",
+        "spatie/fractalistic": "^2.1",
+        "spatie/laravel-fractal": "^4.0",
         "spatie/laravel-permission": "^2.1",
         "tymon/jwt-auth": "^0.5.11"
     },

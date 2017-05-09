@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Api\Base\BaseController;
+use App\Transformers\UserTransformer;
 use App\User;
 use App\UserActivations;
 use Dingo\Api\Exception\ValidationHttpException;
@@ -14,13 +15,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Spatie\Fractal\Fractal;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class UsersController extends BaseController
 {
-    public $id = "id";
     public $class_name = "users";
     public $model = "\App\User";
 
@@ -43,17 +44,24 @@ class UsersController extends BaseController
     {
         $defaultLimit = 100;
 
-        $allUsers = User::limit($defaultLimit)->get();
-
         if ($request->has('where') && $request->has('order')) {
             return $this->sendResponse(config('imbaas_messages.wrong_query_parameters'), Response::HTTP_BAD_REQUEST);
         }
 
         $table = $this->class_name;
+
         if ($request->has('select')) {
+            if (str_contains(strtolower($request['select']), ['password'])) {
+                return $this->sendResponse(config('imbaas_messages.wrong_query_parameters'), Response::HTTP_BAD_REQUEST);
+            }
             $query = DB::table($table)->select(DB::raw($request['select']));
-        }else{
-            $query = DB::table($table)->select("*");
+        } else {
+            if (config('imbaas_settings.allowTransformers') == true) {
+                $query = DB::table($table)->select('*');
+            } else {
+                $query = DB::table($table)->select(config('imbaas_api_selects.users_list'));
+            }
+
         }
 
         if ($request->has('skip')) {
@@ -84,11 +92,16 @@ class UsersController extends BaseController
 
         if ($request->has('paginate')) {
             $results = $query->paginate($request['paginate']);
-        }
-        else {
+        } else {
             $results = $query->get();
         }
 
+        if (config('imbaas_settings.allowTransformers') == true) {
+            $results = Fractal::create()
+                ->collection($results)
+                ->transformWith(new UserTransformer())
+                ->toArray();
+        }
 
         return $this->sendResponse($results, Response::HTTP_OK);
     }

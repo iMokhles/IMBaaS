@@ -194,6 +194,8 @@ return [
          *  Spatie Services Providers
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Spatie\Fractal\FractalServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -260,6 +262,7 @@ return [
 
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Fractal' => Spatie\Fractal\FractalFacade::class,
 
     ],
 

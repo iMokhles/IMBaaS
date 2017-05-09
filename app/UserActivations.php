@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserActivations extends Model
 {
 
+    protected $primaryKey = 'id';
+
     protected $table = 'user_activations';
 
     /**
