@@ -11,15 +11,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Spatie\Fractal\Fractal;
 
 class ClassesController extends BaseController
 {
 
-    public function __construct()
-    {
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -106,7 +103,31 @@ class ClassesController extends BaseController
      */
     public function store(Request $request, $className)
     {
-        //
+        if (!Schema::hasTable($className)) {
+            return $this->sendResponse("you do not have {$className} class", Response::HTTP_BAD_REQUEST);
+        }
+        // class already here check columns
+        $columns = $request['columns'];
+        $columns = json_decode($columns);
+
+        $columns_copy = [];
+        foreach ($columns as $k=>$v) {
+            if (!Schema::hasColumn($className, $k)) {
+                return $this->sendResponse(config('imbaas_messages.wrong_query_parameters'), Response::HTTP_BAD_REQUEST);
+            }
+            $columns_copy[$k] = $v;
+        }
+        if ($className == "users") {
+            if (isset($columns->password)) {
+                $columns_copy['password'] = bcrypt($columns_copy['password']);
+            }
+            $columns_copy['emailVerified'] = false;
+        }
+        $objectCreated = Helpers::insertToTable($className, $columns_copy);
+        if ($objectCreated != null) {
+            return $this->sendResponse("Created Object with Id $objectCreated in $className Class ".Config::get('imbaas_messages.object_created'), Response::HTTP_OK);
+        }
+        return $this->sendResponse(config('imbaas_messages.invalid_action'), Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -117,6 +138,9 @@ class ClassesController extends BaseController
      */
     public function show($className, $id) {
         $object = Helpers::first($className, $id);
+        if ($object == null) {
+            return $this->sendResponse(config('imbaas_messages.object_not_found'), Response::HTTP_BAD_REQUEST);
+        }
         $results = [];
         if (config('imbaas_settings.allowTransformers') == true) {
             if ($className == "users") {
@@ -182,7 +206,6 @@ class ClassesController extends BaseController
             }
         }
         return $this->sendResponse("Object With Id {$object->id} in $className Class ".Config::get('imbaas_messages.object_updated'), Response::HTTP_OK);
-
     }
 
     /**
@@ -192,6 +215,10 @@ class ClassesController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function destroy($className, $id) {
-        //
+        $objectDeleted = Helpers::delete($className, $id);
+        if ($objectDeleted) {
+            return $this->sendResponse(Config::get('imbaas_messages.object_deleted'), Response::HTTP_OK);
+        }
+        return $this->sendResponse(config('imbaas_messages.invalid_action'), Response::HTTP_BAD_REQUEST);
     }
 }

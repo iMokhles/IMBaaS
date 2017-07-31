@@ -74,11 +74,7 @@ class Helpers {
     }
     public static function insertToTable($table,$data=[]) {
         $data['id'] = DB::table($table)->max('id') + 1;
-        if(!$data['created_at']) {
-            if(Schema::hasColumn($table,'created_at')) {
-                $data['created_at'] = date('Y-m-d H:i:s');
-            }
-        }
+        $data['created_at'] = date('Y-m-d H:i:s');
         if(DB::table($table)->insert($data)) return $data['id'];
         else return false;
     }
