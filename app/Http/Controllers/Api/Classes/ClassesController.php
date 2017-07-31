@@ -19,7 +19,7 @@ class ClassesController extends BaseController
 
     /**
      * Display a listing of the resource.
-     *
+     * Example: /users
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $className)
@@ -97,7 +97,7 @@ class ClassesController extends BaseController
 
     /**
      * Store a newly created resource in storage.
-     *
+     * EXAMPLE: columns = {"name": "test account", "username": "itest_account", "email": "test_account@aol.com", "password": "123456"}
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -132,7 +132,7 @@ class ClassesController extends BaseController
 
     /**
      * Display the specified resource.
-     *
+     * Example: /users/1
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -160,6 +160,10 @@ class ClassesController extends BaseController
 
     /**
      * Update the specified resource in storage.
+     *
+     * EXAMPLE1: fields:{"score": {"decrement": "20"}}
+     * EXAMPLE2: fields:{"score": {"increment": "23"}}
+     * EXAMPLE3: fields:{"name": "imokhles", "email": "imokhles@aol.fr", "username": "Mokhlas", "score": {"increment": "1"}}
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -210,7 +214,7 @@ class ClassesController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     *
+     * Example: /users/1
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
