@@ -25,19 +25,19 @@ class SchemasController extends Controller
         {
             $tables[] = $table->$name;
         }
+        $results = [];
         if(isset($tables)) {
             for ($i = 0; $i < count($tables); $i++) {
                 $table = $tables[$i];
                 $results[$i]["className"] = $table;
-
                 $fields = Schema::getColumnListing($table);
+                $resultsFields = [];
                 foreach ($fields as $field) {
                     $type = DB::connection()->getDoctrineColumn($table, $field)->getType()->getName();
                     $resultsFields[$field] = compact('type');
                 }
                 $results[$i]["fields"] = $resultsFields;
             }
-
             return response()->json(compact('results'));
         }
         response()->json(['message' => 'you do not have any table']);
@@ -138,6 +138,7 @@ class SchemasController extends Controller
             return response()->json(['message' => "you do not have {$className} table"]);
         }
         $fields = Schema::getColumnListing($className);
+        $results = [];
         foreach ($fields as $field) {
             $type = DB::connection()->getDoctrineColumn($className, $field)->getType()->getName();
             $results["className"] = $className;

@@ -197,6 +197,14 @@ return [
         Spatie\Fractal\FractalServiceProvider::class,
 
 
+        // Database to Migrations/Seeds
+//        Hardel\Exporter\DBExporterServiceProvider::class,
+
+        /*
+         * Backpack Services Providers
+         */
+        Backpack\Base\BaseServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Api;
 
 use Closure;
+use Illuminate\Support\Facades\Request;
 
 class Schemas extends BaseApiMiddleware
 {

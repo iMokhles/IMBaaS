@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Api;
 use Closure;
+use Illuminate\Support\Facades\Request;
 
 class BaseApiMiddleware
 {

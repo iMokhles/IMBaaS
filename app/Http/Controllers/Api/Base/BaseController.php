@@ -17,7 +17,7 @@ class BaseController extends Controller
     protected function sendResponse($message, $error_code)
     {
         return response()->json([
-            'info' => $message,
+            'results' => $message,
             'status' => Response::$statusTexts[$error_code],
             'status_code' => $error_code
         ])->setStatusCode($error_code, Response::$statusTexts[$error_code]);

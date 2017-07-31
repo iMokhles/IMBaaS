@@ -5,7 +5,7 @@ IMBaaS is a Backend as a Service application built with Laravel to get your own 
 # TODO
 
 - [ ] Analytics
-- [ ] Classes
+- [x] Classes
 - [ ] Files
 - [ ] Installation
 - [ ] Pushs
