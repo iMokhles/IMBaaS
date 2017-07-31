@@ -83,12 +83,8 @@ class Helpers {
         else return false;
     }
     public static function updateRecord($table, $id, $data=[]) {
-        if(!$data['updated_at']) {
-            if(Schema::hasColumn($table,'updated_at')) {
-                $data['updated_at'] = Carbon::now();
-            }
-        }
-        if(is_int($id)) {
+        $data['updated_at'] = Carbon::now();
+        if(is_int($id) || is_string($id)) {
             $record_updated = DB::table($table)->where('id',$id)->update($data);
             if($record_updated) return true;
             else return false;

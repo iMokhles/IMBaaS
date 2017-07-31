@@ -9,6 +9,7 @@ use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Spatie\Fractal\Fractal;
 
@@ -114,8 +115,7 @@ class ClassesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($className, $id)
-    {
+    public function show($className, $id) {
         $object = Helpers::first($className, $id);
         $results = [];
         if (config('imbaas_settings.allowTransformers') == true) {
@@ -131,8 +131,6 @@ class ClassesController extends BaseController
                     ->toArray();
             }
         }
-
-
         return $this->sendResponse($results, Response::HTTP_OK);
     }
 
@@ -143,9 +141,48 @@ class ClassesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $className, $id)
-    {
-        //
+    public function update(Request $request, $className, $id) {
+        $object = Helpers::first($className, $id);
+
+        $fields = $request['fields'];
+        $fields = json_decode($fields);
+
+        if ($className == "users") {
+            if (isset($fields->password) || isset($fields->emailVerified)) {
+                return $this->sendResponse(config('imbaas_messages.wrong_query_parameters'), Response::HTTP_BAD_REQUEST);
+            }
+        }
+        foreach ($fields as $k=>$v) {
+            if (isset($v->increment)) {
+                $type = DB::connection()->getDoctrineColumn($className, $k)->getType()->getName();
+                if ($type == "integer") {
+                    $item = $object->$k;
+                    Helpers::updateRecord($className, $id, [
+                        $k => $item+$v->increment
+                    ]);
+                } else {
+                    return $this->sendResponse(config('imbaas_messages.wrong_query_parameters'), Response::HTTP_BAD_REQUEST);
+                }
+
+            } else if (isset($v->decrement)) {
+                $type = DB::connection()->getDoctrineColumn($className, $k)->getType()->getName();
+                if ($type == "integer") {
+                    $item = $object->$k;
+                    Helpers::updateRecord($className, $id, [
+                        $k => $item-$v->decrement
+                    ]);
+                } else {
+                    return $this->sendResponse(config('imbaas_messages.wrong_query_parameters'), Response::HTTP_BAD_REQUEST);
+                }
+
+            } else {
+                Helpers::updateRecord($className, $id, [
+                    $k => $v
+                ]);
+            }
+        }
+        return $this->sendResponse("Object With Id {$object->id} in $className Class ".Config::get('imbaas_messages.object_updated'), Response::HTTP_OK);
+
     }
 
     /**
@@ -154,8 +191,7 @@ class ClassesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($className, $id)
-    {
+    public function destroy($className, $id) {
         //
     }
 }

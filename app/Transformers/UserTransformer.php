@@ -17,6 +17,7 @@ class UserTransformer extends TransformerAbstract
             'name' => $user->name,
             'username' => $user->username,
             'email' => $user->email,
+            'score' => $user->score,
             'emailVerified' => (bool)$user->emailVerified,
             'created_at' => $user->created_at,
             'updated_at' => $user->updated_at,

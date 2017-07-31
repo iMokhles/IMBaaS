@@ -23,6 +23,7 @@ return [
     'invalid_update_data' => 'Invalid data',
     'invalid_action' => 'Can\'t perform this action right now, try again later',
     'user_account_updated' => 'Account updated successfully',
+    'object_updated' => 'Updated successfully',
     'user_not_found' => 'User not found',
     'user_deleted' => 'User deleted',
     'wrong_query_parameters' => 'Wrong query parameters',
