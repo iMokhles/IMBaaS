@@ -89,7 +89,6 @@ class FilesHelper extends BaseHelper
             'filename' => $filename,
             'ext' => $ext
         ]);
-        return response()->json($file);
         if ($file != null) {
             $file_path = storage_path("files/$ext/$md5/$filename.$ext");
             return response()->file($file_path, [
