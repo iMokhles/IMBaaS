@@ -46,7 +46,6 @@ class RefreshSeedDatabase extends Command
         Artisan::call('migrate:refresh', [
             "--seed" => true,
             "--force" => true]);
-
         $this->info("Data set successfully.");
     }
 }

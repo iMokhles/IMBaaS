@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Api\Files;
 
+use App\Helpers\FilesHelper;
+use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FilesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+
+    public $class_name = "files";
 
     /**
      * Store a newly created resource in storage.
@@ -25,40 +20,10 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return FilesHelper::uploadFile($request);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function getFile($ext, $md5, $filename) {
+        return FilesHelper::getFile($ext, $md5, $filename);
     }
 }

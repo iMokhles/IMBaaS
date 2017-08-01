@@ -58,42 +58,6 @@ class CreateImbaasDatabase extends Migration {
 
 
 	    /**
-	     * Table: files
-	     */
-	    Schema::create('files', function($table) {
-                $table->increments('id')->unsigned();
-                $table->string('filename', 255)->nullable();
-                $table->string('content_type', 255)->nullable();
-                $table->string('size', 255)->nullable();
-                $table->string('md5', 255)->nullable();
-                $table->string('ext', 255)->nullable();
-                $table->timestamp('created_at')->nullable();
-                $table->timestamp('updated_at')->nullable();
-            });
-
-
-	    /**
-	     * Table: installations
-	     */
-	    Schema::create('installations', function($table) {
-                $table->increments('id')->unsigned();
-                $table->string('gcm_sender_id', 255)->nullable();
-                $table->string('device_token', 255)->nullable();
-                $table->string('locale_identifier', 255)->nullable();
-                $table->string('badge', 255)->nullable();
-                $table->string('imbaas_version', 255)->nullable();
-                $table->string('app_identifier', 255)->nullable();
-                $table->string('app_name', 255)->nullable();
-                $table->string('device_type', 255)->nullable();
-                $table->string('installation_id', 255)->nullable();
-                $table->string('app_version', 255)->nullable();
-                $table->string('push_type', 255)->nullable();
-                $table->timestamp('created_at')->nullable();
-                $table->timestamp('updated_at')->nullable();
-            });
-
-
-	    /**
 	     * Table: languages
 	     */
 	    Schema::create('languages', function($table) {
@@ -279,6 +243,50 @@ class CreateImbaasDatabase extends Migration {
                 $table->timestamp('deleted_at')->nullable();
             });
 
+             /**
+              * Table: files
+              */
+             Schema::create('files', function($table) {
+                 $table->increments('id')->unsigned();
+                 $table->string('filename', 255)->nullable();
+                 $table->string('content_type', 255)->nullable();
+                 $table->string('size', 255)->nullable();
+                 $table->string('md5', 255)->nullable();
+                 $table->string('ext', 255)->nullable();
+                 $table->string('url', 255)->nullable();
+                 $table->integer('user_id')->index('user_id')->unsigned()->nullable();
+                 $table->timestamp('created_at')->nullable();
+                 $table->timestamp('updated_at')->nullable();
+                 $table->foreign('user_id')
+                     ->references('id')
+                     ->on('users')
+                     ->onDelete('cascade');
+             });
+
+             /**
+              * Table: installations
+              */
+             Schema::create('installations', function($table) {
+                 $table->increments('id')->unsigned();
+                 $table->string('gcm_sender_id', 255)->nullable();
+                 $table->string('device_token', 255)->nullable();
+                 $table->string('locale_identifier', 255)->nullable();
+                 $table->string('badge', 255)->nullable();
+                 $table->string('imbaas_version', 255)->nullable();
+                 $table->string('app_identifier', 255)->nullable();
+                 $table->string('app_name', 255)->nullable();
+                 $table->string('device_type', 255)->nullable();
+                 $table->string('installation_id', 255)->nullable();
+                 $table->string('app_version', 255)->nullable();
+                 $table->string('push_type', 255)->nullable();
+                 $table->integer('user_id')->index('user_id')->unsigned()->nullable();
+                 $table->timestamp('created_at')->nullable();
+                 $table->timestamp('updated_at')->nullable();
+                 $table->foreign('user_id')
+                     ->references('id')
+                     ->on('users')
+                     ->onDelete('cascade');
+             });
 
 	    /**
 	     * Table: users_roles

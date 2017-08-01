@@ -27,3 +27,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/users/verifyEmail/{token}', 'Api\Users\UsersController@verifyEmail')->name('users.verifyEmail');
 Route::get('/users/resetPassword/{token}', 'Api\Users\UsersController@resetPassword')->name('users.resetPassword');
+
+Route::get('/files/{ext}/{md5}/{filename}', 'Api\Files\FilesController@getFile')->name('users.getFile');
+
+
+Route::get('/routes', 'HomeController@routes');

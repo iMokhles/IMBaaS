@@ -6,12 +6,13 @@ IMBaaS is a Backend as a Service application built with Laravel to get your own 
 
 - [ ] Analytics
 - [x] Classes
-- [ ] Files
+- [x] Files
 - [ ] Installation
 - [ ] Pushs
 - [ ] Roles
 - [ ] Sessions ( if needed )
 - [x] Admin Panel ( Dashboard )
+- [ ] Improve MasterKey Use to avoid unauthorized calls  
 - [ ] Documentation
 - [ ] Support Multi Applications requests ^_^
 
