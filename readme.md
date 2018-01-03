@@ -28,3 +28,8 @@ If you discover a security vulnerability within IMBaaS, please send an e-mail to
 ## License
 
 IMBaaS is open-sourced software licensed under the [BSD license](https://opensource.org/licenses/BSD-3-Clause).
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/iMokhles/IMBaaS/badge.svg?style=beer-square)](https://beerpay.io/iMokhles/IMBaaS)  [![Beerpay](https://beerpay.io/iMokhles/IMBaaS/make-wish.svg?style=flat-square)](https://beerpay.io/iMokhles/IMBaaS?focus=wish)
